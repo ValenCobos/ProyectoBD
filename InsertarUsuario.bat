@@ -1,0 +1,1 @@
+java -classpath ".;mysql-connector-j-8.0.33.jar" InsertarUsuario

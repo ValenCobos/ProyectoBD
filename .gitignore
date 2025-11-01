@@ -1,0 +1,5 @@
+# Ignorar archivos compilados de Java
+*.class
+
+# Ignorar la librería (Driver JDBC)
+*.jar
