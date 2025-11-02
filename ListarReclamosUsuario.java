@@ -19,29 +19,26 @@ public class ListarReclamosUsuario {
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
-            
-          
 
-            // 1. Pedimos el ID del usuario
             System.out.print("Ingrese ID de usuario para ver sus reclamos: ");
             int idUsuario = scanner.nextInt();
 
             statement = connection.createStatement();
             
-            String query = "SELECT r.nro_reclamo, r.fecha_hora, " +
-                           "COUNT(l.nro_llamado) AS cantidad_rellamados " +
-                           "FROM reclamo r " +
-                           "LEFT JOIN llamado l ON r.nro_reclamo = l.nro_reclamo " +
-                           "WHERE r.id_usuario = " + idUsuario + " " +
-                           "GROUP BY r.nro_reclamo, r.fecha_hora;";
+            String query =  "SELECT r.nro_reclamo, r.fecha_hora, " +
+                            "COUNT(l.nro_llamado) AS cantidad_rellamados " +
+                            "FROM reclamo r " +
+                            "LEFT JOIN llamado l ON r.nro_reclamo = l.nro_reclamo " +
+                            "WHERE r.id_usuario = " + idUsuario + " " +
+                            "GROUP BY r.nro_reclamo, r.fecha_hora;";
             
             
             resultSet = statement.executeQuery(query);
             
             boolean hayResultados = false;
-            System.out.println("\n--- Reclamos del Usuario " + idUsuario + " ---");
+            System.out.println("\n Reclamos del Usuario " + idUsuario);
 
-           
+
             while (resultSet.next()) {
                 hayResultados = true;
                 
@@ -49,27 +46,16 @@ public class ListarReclamosUsuario {
                 Timestamp fechaHora = resultSet.getTimestamp("fecha_hora");
                 int cantRellamados = resultSet.getInt("cantidad_rellamados");
                 
-                System.out.println("---------------------------------");
                 System.out.println("  Nro. Reclamo: " + nroReclamo);
                 System.out.println("  Fecha y Hora: " + fechaHora);
                 System.out.println("  Cantidad de Rellamados: " + cantRellamados);
             }
-            
-            
-            if (!hayResultados) {
-                System.out.println("No se encontraron reclamos para el usuario con ID " + idUsuario + "\n");
-            } else {
-                System.out.println("---------------------------------");
-                System.out.println("Búsqueda completada.\n");
-            }
-            
             
                 
         } catch (Exception e) {
             System.err.println("Ocurrió un error:");
             e.printStackTrace();
         } finally {
-            // Cerramos todos los recursos, incluyendo el ResultSet
             try {
                 if (resultSet != null) resultSet.close();
             } catch (SQLException e) { e.printStackTrace(); }
