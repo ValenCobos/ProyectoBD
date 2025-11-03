@@ -25,7 +25,7 @@ public class ListarReclamosUsuario {
 
             statement = connection.createStatement();
             
-            String query =  "SELECT r.nro_reclamo, r.fecha_hora, " +
+            String query =  "SELECT r.nro_reclamo, " +
                             "COUNT(l.nro_llamado) AS cantidad_rellamados " +
                             "FROM reclamo r " +
                             "LEFT JOIN llamado l ON r.nro_reclamo = l.nro_reclamo " +
@@ -43,11 +43,9 @@ public class ListarReclamosUsuario {
                 hayResultados = true;
                 
                 int nroReclamo = resultSet.getInt("nro_reclamo");
-                Timestamp fechaHora = resultSet.getTimestamp("fecha_hora");
                 int cantRellamados = resultSet.getInt("cantidad_rellamados");
                 
                 System.out.println("  Nro. Reclamo: " + nroReclamo);
-                System.out.println("  Fecha y Hora: " + fechaHora);
                 System.out.println("  Cantidad de Rellamados: " + cantRellamados);
             }
             

@@ -1,16 +1,17 @@
+USE Esquema_Proyecto;
 -- ejercicio 6a)
 SELECT
-    Reclamo.nro_reclamo,
-    Material.cod_material,
+    reclamo.nro_reclamo,
+    material.cod_material,
     utiliza.cantidad
 FROM
-    Reclamo
+    reclamo
 LEFT JOIN
-    utiliza ON Reclamo.nro_reclamo = utiliza.nro_reclamo
+    utiliza ON reclamo.nro_reclamo = utiliza.nro_reclamo
 LEFT JOIN
     Material ON utiliza.cod_material = Material.cod_material
 ORDER BY
-    Reclamo.nro_reclamo;
+    reclamo.nro_reclamo;
 
     
 -- ejercicio 6b)

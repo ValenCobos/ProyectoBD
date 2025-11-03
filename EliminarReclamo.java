@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class EliminarReclamo{
     
     private static final String driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://localhost:3306/Esquema_Proyecto?serverTimezone=UTC";
+    private static final String url = "jdbc:mysql://localhost:3306/Esquema_Proyecto";
     private static final String username = "root"; 
     private static final String password = "root"; 
 
